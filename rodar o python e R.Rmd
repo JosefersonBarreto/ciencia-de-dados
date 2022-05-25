@@ -1,0 +1,46 @@
+---
+title: "usar python no markdown"
+author: "joseferson da silva barreto"
+date: '2022-05-25'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set
+library(reticulate)
+```
+
+
+embrando, caso não esteja funcionando corretamente acesse tools/global options/python/select/conda environments e selecione a opção do interpretador python desejada  
+
+
+## Use o python no R markdown
+
+para usar o python  no R markdown basta apenas apenas abrir um chuck com  a palavra **python**
+
+```{python}
+import pandas as pd 
+import plotly as plt 
+import numpy as np
+import sklearn as snk 
+from sklearn import datasets
+
+iris=datasets.load_iris()
+
+
+dados = pd.DataFrame(data= np.c_[iris['data'], iris['target']],
+                     columns= iris['feature_names'] + ['target'])
+ 
+```
+
+# Chamando os dados do python ára linguagem R
+
+para chamar dados,valores salvos em python para o R basta  passa o argumento "py$"  :
+```{r pressure, echo=FALSE}
+dadosr<-py$dados
+#install.packages('gt')
+library(dplyr)
+dadosr %>% gt::gt()
+```
+
+Ate a próxima! :) 
